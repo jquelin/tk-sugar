@@ -5,8 +5,21 @@ use warnings;
 package Tk::Sugar;
 # ABSTRACT: Sugar syntax for Tk
 
-use Sub::Exporter;
+use Sub::Exporter -setup => {
+    exports => [ qw{ top bottom left right } ],
+    groups  => {
+        pack    => [ qw{ top bottom left right } ],
+        default => [ qw{ -pack } ],
+    }
+};
 
+
+# -- pack options
+
+sub top    () { return ( -side => 'top'    ); }
+sub bottom () { return ( -side => 'bottom' ); }
+sub left   () { return ( -side => 'left'   ); }
+sub right  () { return ( -side => 'right'  ); }
 
 
 1;
@@ -64,13 +77,31 @@ alleviates that worry.
 This module is using L<Sub::Exporter> underneath, so you can use all its
 shenanigans to change the export names.
 
-The following subs are exported by default:
+
+=head2 Exported subs
+
+Look below for the list of available subs.
+
+
+=head3 Pack options
+
+Traditional packer sides:
 
 =over 4
 
+=item * top
+
+=item * bottom
+
+=item * left
+
+=item * right
 
 =back
 
+
+
+=head2 Export groups
 
 The following export groups exist for your convenience:
 
@@ -80,16 +111,9 @@ The following export groups exist for your convenience:
 
 This exports all existing subs.
 
-=back
+=item :pack
 
-
-
-=head1 FUNCTIONS
-
-These you probably don't care about, they're all managed by
-L<Sub::Exporter> and its stuff anyway.
-
-=over 4
+This exports all subs related to L<Tk::pack> options.
 
 =back
 

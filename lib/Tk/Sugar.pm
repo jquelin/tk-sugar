@@ -6,9 +6,14 @@ package Tk::Sugar;
 # ABSTRACT: Sugar syntax for Tk
 
 use Sub::Exporter -setup => {
-    exports => [ qw{ top bottom left right } ],
+    exports => [ qw{
+        top bottom left right
+        fillx filly fill2 xfillx xfilly xfill2
+    } ],
     groups  => {
-        pack    => [ qw{ top bottom left right } ],
+        fill    => [ qw{ fillx filly fill2 xfillx xfilly xfill2 } ],
+        side    => [ qw{ top bottom left right } ],
+        pack    => [ qw{ -fill -side } ],
         default => [ qw{ -pack } ],
     }
 };
@@ -17,10 +22,19 @@ use Sub::Exporter -setup => {
 
 # -- pack options
 
+# pack sides
 sub top    () { return ( -side => 'top'    ); }
 sub bottom () { return ( -side => 'bottom' ); }
 sub left   () { return ( -side => 'left'   ); }
 sub right  () { return ( -side => 'right'  ); }
+
+# pack fill / expand
+sub fillx  () { return ( -fill => 'x'    ); }
+sub filly  () { return ( -fill => 'y'    ); }
+sub fill2  () { return ( -fill => 'both' ); }
+sub xfillx () { return ( -expand => 1, -fill => 'x'    ); }
+sub xfilly () { return ( -expand => 1, -fill => 'y'    ); }
+sub xfill2 () { return ( -expand => 1, -fill => 'both' ); }
 
 
 1;
@@ -86,17 +100,35 @@ Look below for the list of available subs.
 
 =head3 Pack options
 
-Traditional packer sides:
+Traditional packer sides (available as C<:side> export group):
 
 =over 4
 
-=item * top
+=item * top - equivalent to C<< ( -side => 'top' ) >>
 
-=item * bottom
+=item * bottom - ditto
 
-=item * left
+=item * left - ditto
 
-=item * right
+=item * right - ditto
+
+=back
+
+Packer expand and filling (available as C<:fill> export group):
+
+=over 4
+
+=item * fillx - equivalent to C<< ( -fill => 'x' ) >>
+
+=item * filly - equivalent to C<< ( -fill => 'y' ) >>
+
+=item * fill2 - equivalent to C<< ( -fill => 'both' ) >>
+
+=item * xfillx - same as C<fillx> with C<< ( -expand => 1 ) >>
+
+=item * xfilly - ditto for C<filly>
+
+=item * xfill2 - ditto for C<fill2>
 
 =back
 
@@ -104,7 +136,8 @@ Traditional packer sides:
 
 =head2 Export groups
 
-The following export groups exist for your convenience:
+Beside the individual groups outlined above, the following export groups
+exist for your convenience:
 
 =over 4
 
@@ -114,7 +147,8 @@ This exports all existing subs.
 
 =item :pack
 
-This exports all subs related to L<Tk::pack> options.
+This exports all subs related to L<Tk::pack> options. Same as C<:side>
+and C<:fill>.
 
 =back
 

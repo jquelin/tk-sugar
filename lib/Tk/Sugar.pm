@@ -13,6 +13,7 @@ use Sub::Exporter -setup => {
     }
 };
 
+## no critic (ProhibitSubroutinePrototypes)
 
 # -- pack options
 

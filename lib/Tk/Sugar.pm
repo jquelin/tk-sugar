@@ -25,7 +25,7 @@ use Sub::Exporter -setup => {
         anchor  => [ qw{ N S E W C NE NW SE SW } ],
         orient  => [ qw{ horizontal vertical } ],
         options => [ qw{ -state -anchor -orient } ],
-        default => [ qw{ -pack } ],
+        default => [ qw{ -pack -options } ],
     }
 };
 

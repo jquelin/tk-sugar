@@ -9,11 +9,13 @@ use Sub::Exporter -setup => {
     exports => [ qw{
         top bottom left right
         fillx filly fill2 xfillx xfilly xfill2
+        pad pad1 pad2 pad5 pad10 pad20
     } ],
     groups  => {
         fill    => [ qw{ fillx filly fill2 xfillx xfilly xfill2 } ],
         side    => [ qw{ top bottom left right } ],
-        pack    => [ qw{ -fill -side } ],
+        pad     => [ qw{ pad pad1 pad2 pad5 pad10 pad20 } ],
+        pack    => [ qw{ -fill -side -pad } ],
         default => [ qw{ -pack } ],
     }
 };
@@ -21,6 +23,7 @@ use Sub::Exporter -setup => {
 ## no critic (ProhibitSubroutinePrototypes)
 
 # -- pack options
+# cf perldoc Tk::pack for more information
 
 # pack sides
 sub top    () { return ( -side => 'top'    ); }
@@ -36,6 +39,15 @@ sub xfillx () { return ( -expand => 1, -fill => 'x'    ); }
 sub xfilly () { return ( -expand => 1, -fill => 'y'    ); }
 sub xfill2 () { return ( -expand => 1, -fill => 'both' ); }
 
+# padding
+sub pad1  () { return ( -padx => 1,  -pady => 1  ); }
+sub pad2  () { return ( -padx => 2,  -pady => 2  ); }
+sub pad5  () { return ( -padx => 5,  -pady => 5  ); }
+sub pad10 () { return ( -padx => 10, -pady => 10 ); }
+sub pad20 () { return ( -padx => 20, -pady => 20 ); }
+sub pad { my $n=shift; return ( -padx => $n, -pady => $n ); }
+
+
 
 1;
 __END__
@@ -44,13 +56,13 @@ __END__
 
     use Tk::Sugar;
 
-    $widget->pack( top, xfill2, pad20 );
+    $widget->pack( top, xfill2, pad10 );
     # equivalent to those pack options:
     #     -side   => 'top'
     #     -expand => 1
     #     -fill   => 'both'
-    #     -padx   => 20
-    #     -pady   => 20
+    #     -padx   => 10
+    #     -pady   => 10
 
     $widget->configure( enabled );
     # equivalent to: -state => 'enabled'
@@ -132,6 +144,23 @@ Packer expand and filling (available as C<:fill> export group):
 
 =back
 
+Packer padding (available as C<:pad> export group):
+
+=over 4
+
+=item * pad1 - equivalent to C<< ( -padx => 1, -pady => 1 ) >>
+
+=item * pad2 - ditto with 2 pixels
+
+=item * pad5 - ditto with 5 pixels
+
+=item * pad10 - ditto with 10 pixels
+
+=item * pad20 - ditto with 20 pixels
+
+=item * pad($n) - ditto with $n pixels (function call with one argument)
+
+=back
 
 
 =head2 Export groups

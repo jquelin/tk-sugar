@@ -99,7 +99,7 @@ __END__
 
 =head1 SYNOPSIS
 
-    use Tk::Sugar;
+    use Tk::Sugar qw{ :pack :state };
 
     $widget->pack( top, xfill2, pad10 );
     # equivalent to those pack options:
@@ -311,7 +311,8 @@ C<:fill>, C<:pad> and C<:ipad>.
 
 =item :options
 
-This exports subs related to widget configure options. Same as C<:state>.
+This exports subs related to widget configure options. Same as
+C<:state>, C<:anchor> and C<:orient>.
 
 =back
 

@@ -12,6 +12,7 @@ use Sub::Exporter -setup => {
         pad pad1 pad2 pad5 pad10 pad20 padx pady
         ipad ipad1 ipad2 ipad5 ipad10 ipad20 ipadx ipady
         enabled disabled
+        N S E W C NE NW SE SW
     } ],
     groups  => {
         fill    => [ qw{ fillx filly fill2 xfillx xfilly xfill2 expand } ],
@@ -20,7 +21,8 @@ use Sub::Exporter -setup => {
         ipad    => [ qw{ ipad ipad1 ipad2 ipad5 ipad10 ipad20 ipadx ipady } ],
         pack    => [ qw{ -fill -side -pad -ipad } ],
         state   => [ qw{ enabled disabled } ],
-        options => [ qw{ -state } ],
+        anchor  => [ qw{ N S E W C NE NW SE SW } ],
+        options => [ qw{ -state -anchor } ],
         default => [ qw{ -pack } ],
     }
 };
@@ -72,6 +74,17 @@ sub ipady { my $n=shift; return ( -ipady => $n ); }
 # widget state
 sub enabled  () { return ( -state => 'normal'   ); }
 sub disabled () { return ( -state => 'disabled' ); }
+
+# anchor
+sub N  () { return ( -anchor => 'n'      ); }
+sub S  () { return ( -anchor => 's'      ); }
+sub E  () { return ( -anchor => 'e'      ); }
+sub W  () { return ( -anchor => 'w'      ); }
+sub C  () { return ( -anchor => 'center' ); }
+sub NE () { return ( -anchor => 'ne'     ); }
+sub NW () { return ( -anchor => 'nw'     ); }
+sub SE () { return ( -anchor => 'se'     ); }
+sub SW () { return ( -anchor => 'sw'     ); }
 
 
 
@@ -232,6 +245,33 @@ Widget state (available as C<:state> export group):
 =item * enabled - equivalent to C<< ( -state => 'normal' ) >>
 
 =item * disabled - ditto for C<disabled>
+
+=back
+
+
+Widget anchor (available as C<:anchor> export group). Note that those
+subs are upper case, otherwise the sub C<s> would clash with the regex
+substitution:
+
+=over 4
+
+=item * N - equivalent to C<< ( -anchor => 'n' ) >>
+
+=item * S - ditto with C<s>
+
+=item * E - ditto with C<e>
+
+=item * W - ditto with C<w>
+
+=item * C - ditto with C<center>
+
+=item * NE - ditto with C<ne>
+
+=item * NW - ditto with C<nw>
+
+=item * SE - ditto with C<se>
+
+=item * SW - ditto with C<sw>
 
 =back
 

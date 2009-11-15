@@ -8,12 +8,12 @@ package Tk::Sugar;
 use Sub::Exporter -setup => {
     exports => [ qw{
         top bottom left right
-        fillx filly fill2 xfillx xfilly xfill2
+        fillx filly fill2 xfillx xfilly xfill2 expand
         pad pad1 pad2 pad5 pad10 pad20 padx pady
         ipad ipad1 ipad2 ipad5 ipad10 ipad20 ipadx ipady
     } ],
     groups  => {
-        fill    => [ qw{ fillx filly fill2 xfillx xfilly xfill2 } ],
+        fill    => [ qw{ fillx filly fill2 xfillx xfilly xfill2 expand } ],
         side    => [ qw{ top bottom left right } ],
         pad     => [ qw{ pad pad1 pad2 pad5 pad10 pad20 padx pady } ],
         ipad    => [ qw{ ipad ipad1 ipad2 ipad5 ipad10 ipad20 ipadx ipady } ],
@@ -40,6 +40,7 @@ sub fill2  () { return ( -fill => 'both' ); }
 sub xfillx () { return ( -expand => 1, -fill => 'x'    ); }
 sub xfilly () { return ( -expand => 1, -fill => 'y'    ); }
 sub xfill2 () { return ( -expand => 1, -fill => 'both' ); }
+sub expand () { return ( -expand => 1 ); }
 
 # padding
 sub pad1  () { return ( -padx => 1,  -pady => 1  ); }
@@ -156,6 +157,9 @@ Packer expand and filling (available as C<:fill> export group):
 =item * xfilly - ditto for C<filly>
 
 =item * xfill2 - ditto for C<fill2>
+
+=item * expand - equivalent to C<< ( -expand => 1 ) >> if you don't like
+the C<xfill*> notation
 
 =back
 

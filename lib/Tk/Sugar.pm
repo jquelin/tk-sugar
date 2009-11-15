@@ -11,6 +11,7 @@ use Sub::Exporter -setup => {
         fillx filly fill2 xfillx xfilly xfill2 expand
         pad pad1 pad2 pad5 pad10 pad20 padx pady
         ipad ipad1 ipad2 ipad5 ipad10 ipad20 ipadx ipady
+        enabled disabled
     } ],
     groups  => {
         fill    => [ qw{ fillx filly fill2 xfillx xfilly xfill2 expand } ],
@@ -18,6 +19,8 @@ use Sub::Exporter -setup => {
         pad     => [ qw{ pad pad1 pad2 pad5 pad10 pad20 padx pady } ],
         ipad    => [ qw{ ipad ipad1 ipad2 ipad5 ipad10 ipad20 ipadx ipady } ],
         pack    => [ qw{ -fill -side -pad -ipad } ],
+        state   => [ qw{ enabled disabled } ],
+        options => [ qw{ -state } ],
         default => [ qw{ -pack } ],
     }
 };
@@ -61,6 +64,14 @@ sub ipad20 () { return ( -ipadx => 20, -ipady => 20 ); }
 sub ipad  { my $n=shift; return ( -ipadx => $n, -ipady => $n ); }
 sub ipadx { my $n=shift; return ( -ipadx => $n ); }
 sub ipady { my $n=shift; return ( -ipady => $n ); }
+
+
+# -- common widget options
+# cf perldoc Tk::options for more information
+
+# widget state
+sub enabled  () { return ( -state => 'normal'   ); }
+sub disabled () { return ( -state => 'disabled' ); }
 
 
 
@@ -212,6 +223,19 @@ with one argument)
 =back
 
 
+=head3 Common options
+
+Widget state (available as C<:state> export group):
+
+=over 4
+
+=item * enabled - equivalent to C<< ( -state => 'normal' ) >>
+
+=item * disabled - ditto for C<disabled>
+
+=back
+
+
 =head2 Export groups
 
 Beside the individual groups outlined above, the following export groups
@@ -227,6 +251,10 @@ This exports all existing subs.
 
 This exports subs related to L<Tk::pack> options. Same as C<:side>,
 C<:fill>, C<:pad> and C<:ipad>.
+
+=item :options
+
+This exports subs related to widget configure options. Same as C<:state>.
 
 =back
 

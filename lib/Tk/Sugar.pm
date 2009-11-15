@@ -10,11 +10,13 @@ use Sub::Exporter -setup => {
         top bottom left right
         fillx filly fill2 xfillx xfilly xfill2
         pad pad1 pad2 pad5 pad10 pad20
+        ipad ipad1 ipad2 ipad5 ipad10 ipad20
     } ],
     groups  => {
         fill    => [ qw{ fillx filly fill2 xfillx xfilly xfill2 } ],
         side    => [ qw{ top bottom left right } ],
         pad     => [ qw{ pad pad1 pad2 pad5 pad10 pad20 } ],
+        ipad    => [ qw{ ipad ipad1 ipad2 ipad5 ipad10 ipad20 } ],
         pack    => [ qw{ -fill -side -pad } ],
         default => [ qw{ -pack } ],
     }
@@ -46,6 +48,14 @@ sub pad5  () { return ( -padx => 5,  -pady => 5  ); }
 sub pad10 () { return ( -padx => 10, -pady => 10 ); }
 sub pad20 () { return ( -padx => 20, -pady => 20 ); }
 sub pad { my $n=shift; return ( -padx => $n, -pady => $n ); }
+
+# internal padding
+sub ipad1  () { return ( -ipadx => 1,  -ipady => 1  ); }
+sub ipad2  () { return ( -ipadx => 2,  -ipady => 2  ); }
+sub ipad5  () { return ( -ipadx => 5,  -ipady => 5  ); }
+sub ipad10 () { return ( -ipadx => 10, -ipady => 10 ); }
+sub ipad20 () { return ( -ipadx => 20, -ipady => 20 ); }
+sub ipad { my $n=shift; return ( -ipadx => $n, -ipady => $n ); }
 
 
 
@@ -126,6 +136,7 @@ Traditional packer sides (available as C<:side> export group):
 
 =back
 
+
 Packer expand and filling (available as C<:fill> export group):
 
 =over 4
@@ -143,6 +154,7 @@ Packer expand and filling (available as C<:fill> export group):
 =item * xfill2 - ditto for C<fill2>
 
 =back
+
 
 Packer padding (available as C<:pad> export group):
 
@@ -163,6 +175,25 @@ Packer padding (available as C<:pad> export group):
 =back
 
 
+Packer padding (available as C<:ipad> export group):
+
+=over 4
+
+=item * ipad1 - equivalent to C<< ( -ipadx => 1, -ipady => 1 ) >>
+
+=item * ipad2 - ditto with 2 pixels
+
+=item * ipad5 - ditto with 5 pixels
+
+=item * ipad10 - ditto with 10 pixels
+
+=item * ipad20 - ditto with 20 pixels
+
+=item * ipad($n) - ditto with $n pixels (function call with one argument)
+
+=back
+
+
 =head2 Export groups
 
 Beside the individual groups outlined above, the following export groups
@@ -176,7 +207,7 @@ This exports all existing subs.
 
 =item :pack
 
-This exports all subs related to L<Tk::pack> options. Same as C<:side>
+This exports subs related to L<Tk::pack> options. Same as C<:side>
 and C<:fill>.
 
 =back

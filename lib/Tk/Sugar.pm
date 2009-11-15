@@ -17,7 +17,7 @@ use Sub::Exporter -setup => {
         side    => [ qw{ top bottom left right } ],
         pad     => [ qw{ pad pad1 pad2 pad5 pad10 pad20 } ],
         ipad    => [ qw{ ipad ipad1 ipad2 ipad5 ipad10 ipad20 } ],
-        pack    => [ qw{ -fill -side -pad } ],
+        pack    => [ qw{ -fill -side -pad -ipad } ],
         default => [ qw{ -pack } ],
     }
 };
@@ -207,8 +207,8 @@ This exports all existing subs.
 
 =item :pack
 
-This exports subs related to L<Tk::pack> options. Same as C<:side>
-and C<:fill>.
+This exports subs related to L<Tk::pack> options. Same as C<:side>,
+C<:fill>, C<:pad> and C<:ipad>.
 
 =back
 

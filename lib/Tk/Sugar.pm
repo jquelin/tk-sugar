@@ -13,6 +13,7 @@ use Sub::Exporter -setup => {
         ipad ipad1 ipad2 ipad5 ipad10 ipad20 ipadx ipady
         enabled disabled
         N S E W C NE NW SE SW
+        horizontal vertical
     } ],
     groups  => {
         fill    => [ qw{ fillx filly fill2 xfillx xfilly xfill2 expand } ],
@@ -22,7 +23,8 @@ use Sub::Exporter -setup => {
         pack    => [ qw{ -fill -side -pad -ipad } ],
         state   => [ qw{ enabled disabled } ],
         anchor  => [ qw{ N S E W C NE NW SE SW } ],
-        options => [ qw{ -state -anchor } ],
+        orient  => [ qw{ horizontal vertical } ],
+        options => [ qw{ -state -anchor -orient } ],
         default => [ qw{ -pack } ],
     }
 };
@@ -85,6 +87,10 @@ sub NE () { return ( -anchor => 'ne'     ); }
 sub NW () { return ( -anchor => 'nw'     ); }
 sub SE () { return ( -anchor => 'se'     ); }
 sub SW () { return ( -anchor => 'sw'     ); }
+
+# orientation
+sub horizontal () { return ( -orient => 'horizontal' ); }
+sub vertical   () { return ( -orient => 'vertical' ); }
 
 
 
@@ -272,6 +278,17 @@ substitution:
 =item * SE - ditto with C<se>
 
 =item * SW - ditto with C<sw>
+
+=back
+
+
+Widget orientation (available as C<:orient> export group).:
+
+=over 4
+
+=item * horizontal - equivalent to C<< ( -orient => 'horizontal' ) >>
+
+=item * vertical - ditto with C<vertical>
 
 =back
 

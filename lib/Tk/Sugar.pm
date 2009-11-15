@@ -132,11 +132,11 @@ Traditional packer sides (available as C<:side> export group):
 
 =item * top - equivalent to C<< ( -side => 'top' ) >>
 
-=item * bottom - ditto
+=item * bottom - ditto for C<bottom>
 
-=item * left - ditto
+=item * left - ditto for C<left>
 
-=item * right - ditto
+=item * right - ditto for C<right>
 
 =back
 
